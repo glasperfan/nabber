@@ -32,8 +32,8 @@
         "https://*/*"
       ],
       "js": [
-        "js/content.js",
-        "js/jquery-2.1.4.min.js"
+        "js/jquery-2.1.4.min.js", // important that this comes BEFORE content.js
+        "js/content.js"
       ]
     }
   ]
