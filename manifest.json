@@ -13,16 +13,16 @@
     "scripts": [
       "js/background.js"
     ],
-    "persistent": false
+    "persistent": true
   },
   "page_action": {
     "default_icon": "icons/icon128.png",
-    "default_title": "Nabber: download page images"
-    // "default_popup": "html/popup.html"
+    "default_title": "Nabber: download page images",
+    "default_popup": "html/popup.html"
   },
   "permissions": [
-    "tabs",
     "activeTab",
+    "tabs",
     "downloads"
   ],
   "content_scripts": [

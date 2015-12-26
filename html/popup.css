@@ -1,1 +1,65 @@
-popup.css
+/* popup.css */
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:400,600);
+
+
+body {
+	font-family: 'Josefin Sans';
+	font-weight: 400;
+	width: 400px;
+	margin: 17px 19px 12px;
+}
+
+h1 {
+	background-color: #4aaee1;
+    color: white;
+    padding: 8px 0px 4px;
+    text-align: center;
+    margin: 0 0 7px;
+}
+
+div.author {
+	font-size: 11px;
+	text-align: center;
+	border-bottom: 2px solid #666;
+	padding-bottom: 4px;
+	margin: 0;
+}
+
+.content {
+	margin-top: 10px;
+	font-size: 16px;
+}
+
+.floating {
+	overflow: hidden; /* clear for floating elements */
+}
+
+.left  { float: left;  width: 49%; border-right: 2px solid #666; }
+.right { float: right; width: 49%; }
+.center { text-align: center; }
+
+input[type="checkbox"] {
+	margin-bottom: 8px;
+}
+
+input[type="submit"] {
+	margin-top: 8px;
+	padding: 8px 20px;
+	border: none;
+	outline: none;
+	background-color: #4aaee1;
+	color: white;
+	font-size: 18px;
+	font-family: 'Josefin Sans';
+	transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+	background-color: #047FBD;
+}
+
+label.select_all {
+	font-weight: bold;
+	margin-bottom: 12px;
+}
+

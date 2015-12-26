@@ -9,5 +9,5 @@ using the original file names.
 
 ## Versioning
 * Version 0.0.1: Main infrastructure in place, ability to downloads all images on click.
-* Version 0.1.1: (__in progress__) fix contentSettings to remove warning about multiple downloads.
-* Version 0.5.0: (_upcoming_) add popup to allow user to select which images to download.
+* Version 0.5.0: (__in progress__) add popup to allow user to select which images to download.
+* Version 0.5.5: (_upcoming_) fix contentSettings to remove warning about multiple downloads.
