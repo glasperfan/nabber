@@ -1,4 +1,5 @@
 // content.js
+MaxUrlLength = 32;
 
 // on page load, make an index of all of the images and documents on the page, and send that to the popup
 $(document).ready(function () {	
@@ -39,10 +40,26 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
 // takes an image or link element and returns the filename
 function getName(el) {
-	var slashpos = el.lastIndexOf("/");
-	var fileName = el.substr(slashpos + 1);
-	if (slashpos === -1 || fileName.length < 1) {
+	// Use the alt if you can.
+	if (el.alt !== undefined) {
+		if (el.alt.length > 0) {
+			return el.alt;
+		}
+	}
+	var text = (el.href === undefined) ? el.src : el.href;
+	var fileName = text.split("/").pop();
+	if (fileName.length < 1) {
 		return "Untitled";
+	}
+	// trim long names
+	if (fileName.length > MaxUrlLength) {
+		var dotpos = fileName.lastIndexOf(".");
+		if (dotpos > - 1) {
+			var ext = fileName.substr(dotpos);
+			var excerpt = fileName.substr(0, MaxUrlLength - ext.length) + "..." + ext;
+			return excerpt;
+		}
+		return fileName.substr(0, MaxUrlLength - 3) + "...";
 	}
 	return fileName;
 }
@@ -55,7 +72,7 @@ function collectPDFs() {
 		var el = links[i];
 		if (el.href.indexOf(".pdf") != -1) {
 			pdfs.push({
-				name: getName(el.href),
+				name: getName(el),
 				link: el.href
 			});
 		}
@@ -68,7 +85,7 @@ function collectImages() {
 	var els = Array.prototype.slice.call(document.getElementsByTagName('img'));
 	var imgs = els.map(function(el) {
 		return {
-			name: getName(el.src),
+			name: getName(el),
 			link: el.src
 		}
 	});

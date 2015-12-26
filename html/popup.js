@@ -28,6 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
             for (var i = 0; i < pdfs.length; i++) {
             	addCheckbox(doc_column, doc_col_id, pdfs[i].link, pdfs[i].name);
             }
+
+            // fix left/right height to adjust the border
+		    var max_height = Math.max($('.left').height(), $('.right').height())
+		    $('.left').height(max_height);
+		    $('.right').height(max_height);
         });
     });
 

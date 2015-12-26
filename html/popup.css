@@ -5,7 +5,7 @@
 body {
 	font-family: 'Josefin Sans';
 	font-weight: 400;
-	width: 400px;
+	width: 600px;
 	margin: 17px 19px 12px;
 }
 
@@ -25,6 +25,16 @@ div.author {
 	margin: 0;
 }
 
+div.author a {
+	text-decoration: none;
+	outline: none;
+	transition: all 0.3s ease;
+}
+
+div.author a:hover {
+	color: #4aaee1; /*#047FBD*/
+}
+
 .content {
 	margin-top: 10px;
 	font-size: 16px;
@@ -32,6 +42,8 @@ div.author {
 
 .floating {
 	overflow: hidden; /* clear for floating elements */
+	border-bottom: 2px solid #666;
+	padding-bottom: 10px;
 }
 
 .left  { float: left;  width: 49%; border-right: 2px solid #666; }
@@ -43,7 +55,7 @@ input[type="checkbox"] {
 }
 
 input[type="submit"] {
-	margin-top: 8px;
+	margin-top: 15px;
 	padding: 8px 20px;
 	border: none;
 	outline: none;
