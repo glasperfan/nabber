@@ -104,9 +104,14 @@ function addCheckbox(parent, type, link, name) {
 	label.htmlFor = link;
 	label.appendChild(document.createTextNode(name));
 
-	parent.appendChild(cb);
-	parent.appendChild(label);
-	parent.appendChild(document.createElement("br"));
+	// create parent div for formatting
+	var wrapper = document.createElement("div");
+	wrapper.className = "form-element";
+
+	wrapper.appendChild(cb);
+	wrapper.appendChild(label);
+	wrapper.appendChild(document.createElement("br"));
+	parent.appendChild(wrapper);
 }
 
 // Toggle "Select/De-select All"

@@ -46,13 +46,10 @@ div.author a:hover {
 	padding-bottom: 10px;
 }
 
-.left  { float: left;  width: 49%; border-right: 2px solid #666; }
+.left  { float: left;  width: 49%; border-right: 2px solid #666; padding-right: 5px; }
 .right { float: right; width: 49%; }
 .center { text-align: center; }
 
-input[type="checkbox"] {
-	margin-bottom: 8px;
-}
 
 input[type="submit"] {
 	margin-top: 15px;
@@ -70,8 +67,11 @@ input[type="submit"]:hover {
 	background-color: #047FBD;
 }
 
+.form-element {
+	margin-bottom: 12px;
+}
+
 label.select_all {
 	font-weight: bold;
-	margin-bottom: 12px;
 }
 

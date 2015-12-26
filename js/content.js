@@ -1,5 +1,5 @@
 // content.js
-MaxUrlLength = 32;
+MaxUrlLength = 26;
 
 // on page load, make an index of all of the images and documents on the page, and send that to the popup
 $(document).ready(function () {	
