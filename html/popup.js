@@ -10,6 +10,7 @@ img_select_all = document.getElementById(img_sel_id);
 doc_select_all = document.getElementById(doc_sel_id);
 submit_button = document.getElementById("submit");
 form_el = document.getElementById("nabber_form");
+inputs = document.getElementsByTagName("input");
 
 // When the popup is opened, send a message to collect the links 
 document.addEventListener('DOMContentLoaded', function() {
@@ -49,8 +50,29 @@ document.addEventListener('DOMContentLoaded', function() {
     	submit_button.value = "Got it!";
     	submit_button.style.backgroundColor = "#35D63A";
     	setTimeout(function() {
-    		window.close();
-    	}, 1000);
+    		// determine which images to download
+    		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    			toDownload = []; 
+    			for (var i = 0; i < inputs.length; i++) {
+    				ipi = inputs[i];
+    				if ((ipi.name === img_col_id || ipi.name === doc_col_id) && ipi.checked) {
+    					toDownload.push({
+    						link: ipi.id,
+    						name: $('label[for="' + ipi.id + '"]').text()
+    					});
+    				}
+    			}
+    			// send message to content script to download selected images
+    			chrome.tabs.sendMessage(tabs[0].id, {message:"download", toDownload: toDownload},
+					function(response) {
+						// and close the window upon a response
+    					if (response.message === "close_popup") {
+    						window.close();
+    					}
+					}
+				);
+    		});
+    	}, 500);
     });
 
 });
@@ -84,7 +106,6 @@ function addCheckbox(parent, type, link, name) {
 
 // Toggle "Select/De-select All"
 function toggleAll(element) {
-	var inputs = document.getElementsByTagName("input");
 	for(var i = 0; i < inputs.length; i++) {
     	if (element.id === img_sel_id && inputs[i].name === img_col_id) {
     		inputs[i].checked = element.checked;
@@ -99,7 +120,6 @@ function toggleAll(element) {
 function updateSelectAll(type) {
 	var checked = true;
 	var selectElement = (type === img_col_id) ? img_select_all : doc_select_all;
-	var inputs = document.getElementsByTagName("input");
 	for (var i = 0; i < inputs.length; i++) {
 		if (inputs[i].name === type) {
 			checked = checked && inputs[i].checked;

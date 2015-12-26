@@ -8,16 +8,24 @@ $(document).ready(function () {
 
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	console.log(request);
+	//console.log("RECEIVING REQUEST: " + request.message);
+	
+	// collect links
 	if (request.message === "collect_links") {
-		console.log("request received!");
-		console.log(images);
 		sendResponse({ 
 			images: images,
 			pdfs: pdfs 
 		});
 	}
 
+	// download resources
+	if (request.message === "download") {
+		downloads = request.toDownload;
+		for (var i = 0; i < downloads.length; i++) {
+			downloadImage(downloads[i].link, downloads[i].name);
+		}
+		sendResponse({message: "close_popup"});
+	}
 });
 
 
@@ -68,10 +76,10 @@ function collectImages() {
 }
 
 // takes an image element and downloads it
-function downloadImage(img) {
+function downloadImage(link, name) {
 	var a = document.createElement('a');
-	a.href = img.src;
-	a.download = getName(img.src);
+	a.href = link;
+	a.download = name;
 	document.body.appendChild(a);
 	a.click();
 	document.body.removeChild(a);
